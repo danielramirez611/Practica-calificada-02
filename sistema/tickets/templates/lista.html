@@ -1,0 +1,40 @@
+<!-- lista.html -->
+{% extends 'layout.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<style>
+    /* Estilo para las imágenes de los servicios */
+    .servicio-image {
+        width: 300px; /* Establecer un ancho fijo para todas las imágenes */
+        height: 200px; /* Establecer una altura fija para todas las imágenes */
+        object-fit: cover; /* Para asegurar que las imágenes se ajusten correctamente */
+    }
+</style>
+
+<div class="container">
+    <h1 class="mt-5">Lista de Servicios</h1>
+    <ul class="list-group mt-3">
+        {% for servicio in servicios %}
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>{{ servicio.nombre }}</h2>
+                    <p><strong>Descripción:</strong> {{ servicio.descripcion }}</p>
+                    <p><strong>Precio:</strong> {{ servicio.precio }}</p>
+                </div>
+                <div class="col-md-6">
+                    <!-- Utilizando las clases de Bootstrap para el tamaño de las imágenes -->
+                    <img src="{{ servicio.image.url }}" alt="{{ servicio.nombre }} Imagen" class="img-fluid servicio-image">
+                </div>
+            </div>
+        </li>
+        {% empty %}
+        <li class="list-group-item">No hay servicios disponibles.</li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}
